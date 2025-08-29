@@ -1,53 +1,38 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-function ResumeUpload({ onResult }) {
+const ResumeUpload = () => {
   const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
 
-  const handleFileChange = (e) => {
+  const handleUpload = (e) => {
     setFile(e.target.files[0]);
   };
 
-  const handleUpload = async () => {
+  const handleSubmit = () => {
     if (!file) {
-      toast.error("Please upload a resume first!");
+      alert("Please upload a resume first!");
       return;
     }
-
-    const formData = new FormData();
-    formData.append("resume", file);
-
-    try {
-      setLoading(true);
-      const res = await axios.post("http://localhost:5000/api/resume/analyze", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      onResult(res.data); // send results to parent
-      toast.success("Resume analyzed successfully!");
-    } catch (err) {
-      console.error(err);
-      toast.error("Error analyzing resume!");
-    } finally {
-      setLoading(false);
-    }
+    // TODO: Send file to backend API
+    console.log("Uploaded file:", file);
   };
 
   return (
-    <div className="p-4 border rounded-lg shadow-md w-full max-w-md bg-white">
-      <h2 className="text-xl font-bold mb-2">Upload Resume</h2>
-      <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} />
+    <div className="bg-white p-6 shadow-md rounded-lg w-full md:w-1/2">
+      <h2 className="text-lg font-bold mb-4 text-gray-800">Upload Your Resume</h2>
+      <input
+        type="file"
+        accept=".pdf,.doc,.docx"
+        onChange={handleUpload}
+        className="mb-4 block w-full text-gray-700 border border-gray-300 rounded-lg p-2"
+      />
       <button
-        onClick={handleUpload}
-        disabled={loading}
-        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+        onClick={handleSubmit}
+        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg"
       >
-        {loading ? "Analyzing..." : "Upload & Analyze"}
+        Analyze Resume
       </button>
     </div>
   );
-}
+};
 
 export default ResumeUpload;

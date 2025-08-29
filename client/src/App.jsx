@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import ResumeUpload from "./components/ResumeUpload";
-import Results from "./components/Results";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import "./App.css";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [analysis, setAnalysis] = useState(null);
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6">AI-Powered Resume Roster</h1>
-      <ResumeUpload onResult={setAnalysis} />
-      <Results data={analysis} />
-      <ToastContainer />
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
+    </Router>
   );
 }
 
