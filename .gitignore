@@ -1,5 +1,8 @@
 
 /client/node_modules
 /server/node_modules
+/parser/myenv
+/client/.env
+/server/.env
 
 .env

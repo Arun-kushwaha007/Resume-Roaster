@@ -1,10 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+require('dotenv').config();
+
+
 const uploadRouter = require('./routes/upload');
 
 
-require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -17,7 +19,11 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, async () => {
 console.log(`Server running on port ${PORT}`);
 if (process.env.MONGO_URI) {
+try {
 await mongoose.connect(process.env.MONGO_URI);
 console.log('Connected to MongoDB');
+} catch (e) {
+console.error('Mongo connection error', e.message);
+}
 }
 });
