@@ -1,38 +1,42 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const ResumeUpload = () => {
+function ResumeUpload({ setResults }) {
   const [file, setFile] = useState(null);
 
-  const handleUpload = (e) => {
-    setFile(e.target.files[0]);
-  };
+  const handleFileChange = (e) => setFile(e.target.files[0]);
 
-  const handleSubmit = () => {
+  const handleUpload = async () => {
     if (!file) {
-      alert("Please upload a resume first!");
+      toast.error("Please upload a resume file!");
       return;
     }
-    // TODO: Send file to backend API
-    console.log("Uploaded file:", file);
+
+    const formData = new FormData();
+    formData.append("resume", file);
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setResults(res.data);
+      toast.success("Resume analyzed!");
+    } catch (err) {
+      toast.error("Error analyzing resume!");
+    }
   };
 
   return (
-    <div className="bg-white p-6 shadow-md rounded-lg w-full md:w-1/2">
-      <h2 className="text-lg font-bold mb-4 text-gray-800">Upload Your Resume</h2>
-      <input
-        type="file"
-        accept=".pdf,.doc,.docx"
-        onChange={handleUpload}
-        className="mb-4 block w-full text-gray-700 border border-gray-300 rounded-lg p-2"
-      />
+    <div className="text-center">
+      <input type="file" accept=".pdf,.docx" onChange={handleFileChange} />
       <button
-        onClick={handleSubmit}
-        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg"
+        onClick={handleUpload}
+        className="bg-blue-600 text-white px-4 py-2 rounded ml-4 hover:bg-blue-700"
       >
-        Analyze Resume
+        Upload & Analyze
       </button>
     </div>
   );
-};
-
+}
 export default ResumeUpload;

@@ -1,23 +1,13 @@
-import React from "react";
-
-const Suggestions = () => {
-  const tips = [
-    "Use standard fonts like Arial or Times New Roman.",
-    "Avoid graphics and tables, stick to text-based formatting.",
-    "Include relevant keywords from job descriptions.",
-    "Keep resume concise, ideally 1-2 pages.",
-  ];
-
+function Suggestions({ suggestions }) {
   return (
-    <div className="bg-white p-6 shadow-md rounded-lg" id="suggestions">
-      <h2 className="text-lg font-bold mb-4 text-gray-800">Suggestions for Improvement</h2>
-      <ul className="list-disc pl-5 space-y-2 text-gray-600">
-        {tips.map((tip, index) => (
-          <li key={index}>{tip}</li>
+    <div className="bg-yellow-100 p-6 rounded">
+      <h2 className="text-xl font-bold mb-2">Suggestions</h2>
+      <ul className="list-disc ml-6">
+        {suggestions?.map((s, i) => (
+          <li key={i}>{s}</li>
         ))}
       </ul>
     </div>
   );
-};
-
+}
 export default Suggestions;
