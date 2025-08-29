@@ -4,5 +4,8 @@
 /parser/myenv
 /client/.env
 /server/.env
-
+/server/uploads
+/parser/__pycache__
+/parser/.env
+/parser/myenv/
 .env
