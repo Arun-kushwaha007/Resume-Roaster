@@ -3,12 +3,7 @@ import pdfplumber
 import docx
 import os
 import google.generativeai as genai
-from dotenv import load_dotenv
 from collections import Counter
-
-# Load environment variables from ../server/.env
-dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'server', '.env')
-load_dotenv(dotenv_path=dotenv_path)
 
 # Configure the Gemini API
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")

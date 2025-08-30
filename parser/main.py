@@ -1,13 +1,15 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, UploadFile, File
 import parse_utils
+import tempfile
 
 app = FastAPI()
 
-class ResumeRequest(BaseModel):
-    file_path: str
-
 @app.post("/parse")
-def parse_resume(req: ResumeRequest):
-    score, suggestions, sections = parse_utils.analyze(req.file_path)
+async def parse_resume(file: UploadFile = File(...)):
+    # Use a temporary file to save the uploaded content
+    with tempfile.NamedTemporaryFile(delete=False, suffix=file.filename) as tmp:
+        tmp.write(await file.read())
+        tmp_path = tmp.name
+    
+    score, suggestions, sections = parse_utils.analyze(tmp_path)
     return {"score": score, "suggestions": suggestions, "sections": sections}
