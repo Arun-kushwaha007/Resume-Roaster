@@ -7,7 +7,7 @@ const upload = multer({ dest: "uploads/" });
 
 router.post("/", upload.single("resume"), async (req, res) => {
   try {
-    const result = await analyzeResume(req.file.path);
+    const result = await analyzeResume(req.file.path, req.file.originalname);
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: "Error analyzing resume" });
