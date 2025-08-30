@@ -3,3 +3,5 @@ uvicorn
 python-docx
 pdfplumber
 pydantic
+google-generativeai
+python-dotenv
