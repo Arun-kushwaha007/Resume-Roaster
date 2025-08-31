@@ -1,5 +1,5 @@
 import { FireIcon, LightBulbIcon, WrenchScrewdriverIcon, PaintBrushIcon } from '@heroicons/react/24/outline';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 
 function Suggestions({ suggestions }) {
   const { roast, fix, general, formatting } = suggestions;
@@ -13,7 +13,7 @@ function Suggestions({ suggestions }) {
     <div className="space-y-8">
       {/* Roast Section */}
       {roast && (
-        <motion.div
+        <Motion.div
           className="card bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-6 rounded-2xl shadow-lg"
           variants={cardVariants}
           initial="hidden"
@@ -24,12 +24,12 @@ function Suggestions({ suggestions }) {
             The Roast
           </h2>
           <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap font-medium">{roast}</p>
-        </motion.div>
+        </Motion.div>
       )}
 
       {/* AI Fixes Section */}
       {fix && (
-        <motion.div
+        <Motion.div
           className="card bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 dark:border-green-400 p-6 rounded-2xl shadow-lg"
           variants={cardVariants}
           initial="hidden"
@@ -40,12 +40,12 @@ function Suggestions({ suggestions }) {
             AI-Generated Improvements
           </h2>
           <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{fix}</p>
-        </motion.div>
+        </Motion.div>
       )}
 
       {/* General Suggestions Section */}
       {general && general.length > 0 && (
-        <motion.div
+        <Motion.div
           className="card bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 dark:border-yellow-400 p-6 rounded-2xl shadow-lg"
           variants={cardVariants}
           initial="hidden"
@@ -60,12 +60,12 @@ function Suggestions({ suggestions }) {
               <li key={index}>{item}</li>
             ))}
           </ul>
-        </motion.div>
+        </Motion.div>
       )}
       
       {/* Formatting Suggestions Section */}
       {formatting && formatting.length > 0 && (
-        <motion.div
+        <Motion.div
           className="card bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 dark:border-blue-400 p-6 rounded-2xl shadow-lg"
           variants={cardVariants}
           initial="hidden"
@@ -80,7 +80,7 @@ function Suggestions({ suggestions }) {
               <li key={index}>{item}</li>
             ))}
           </ul>
-        </motion.div>
+        </Motion.div>
       )}
     </div>
   );

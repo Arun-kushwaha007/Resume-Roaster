@@ -14,7 +14,7 @@ const Navbar = () => {
         <a href="/" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Home</a>
         <a href="#results" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Results</a>
         <a href="#suggestions" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">Suggestions</a>
-        <button 
+        {/* <button 
           onClick={toggleTheme} 
           className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
           aria-label="Toggle theme"
@@ -30,7 +30,7 @@ const Navbar = () => {
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
             </svg>
           )}
-        </button>
+        </button> */}
       </div>
     </nav>
   );
