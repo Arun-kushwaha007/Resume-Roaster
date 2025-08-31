@@ -1,56 +1,42 @@
-import React, { useState } from "react";
+// client/src/pages/Home.jsx
+import { useState } from "react";
 import ResumeUpload from "../components/ResumeUpload";
 import ATSScore from "../components/ATSScore";
 import Suggestions from "../components/Suggestions";
 import Navbar from "../components/Navbar";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function Home() {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Show toast on successful analysis
-  React.useEffect(() => {
-    if (analysisResult && !isLoading) {
-      toast.success("Resume analyzed successfully!");
-    }
-  }, [analysisResult, isLoading]);
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-white to-blue-50">
-      <ToastContainer position="top-center" autoClose={2500} />
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* <Navbar /> */}
       <main className="container mx-auto p-4 md:p-8">
         <div className="max-w-4xl mx-auto">
-          {/* Hero Section */}
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-400 mb-4 drop-shadow-lg">
-              AI Resume Analyzer
+            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-white mb-2">
+              Supercharge Your Resume with AI
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto font-medium">
-              Upload your resume and get an instant, brutally honest, AI-powered analysis with actionable suggestions to boost your job search.
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Our AI-powered resume analyzer gives you the feedback you need to land your dream job. Get an instant, brutally honest analysis of your resume, including an ATS score and actionable suggestions.
             </p>
           </div>
 
           {/* Upload Section */}
-          <div className="card bg-white/90 p-10 rounded-3xl shadow-2xl border border-blue-100 hover:shadow-blue-200 transition-shadow duration-300">
+          <div className="card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
             <ResumeUpload setResults={setAnalysisResult} setIsLoading={setIsLoading} />
           </div>
 
-          {/* Loader */}
           {isLoading && (
-            <div className="text-center my-12">
-              <p className="text-lg text-blue-700 font-semibold animate-pulse">Analyzing your resume... This might take a moment.</p>
-              <div className="flex justify-center mt-6">
-                <span className="inline-block w-16 h-16 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin"></span>
-              </div>
+            <div className="text-center my-8">
+              <p className="text-lg text-gray-600 dark:text-gray-300">Analyzing your resume... This might take a moment.</p>
+              <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 dark:border-gray-700 h-24 w-24 mx-auto mt-4"></div>
             </div>
           )}
 
-          {/* Results */}
           {analysisResult && !isLoading && (
-            <div className="mt-14 grid gap-10">
+            <div className="mt-12 grid gap-8">
               <ATSScore score={analysisResult.score} />
               <Suggestions suggestions={analysisResult.suggestions} />
             </div>
