@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 
-function ResumeUpload({ setResults, setIsLoading }) {
+function ResumeUpload({ setResults, setIsLoading, setFile: setFileProp }) {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setFileProp(selectedFile);
   };
 
   const handleUpload = async () => {

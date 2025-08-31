@@ -186,7 +186,7 @@ function suggestForExperience(text) {
   return suggestions;
 }
 
-function computeATSScores(parsedText, layoutJson = {}, jobDescriptionText = '') {
+export function computeATSScores(parsedText, layoutJson = {}, jobDescriptionText = '') {
   const sections = splitSections(parsedText || '');
   const contactScore = scoreContact(parsedText);
   const summaryScore = scoreSummary(sections.summary);
@@ -223,5 +223,3 @@ function computeATSScores(parsedText, layoutJson = {}, jobDescriptionText = '') 
     sectionsDetected: Object.keys(sections).filter(k=>sections[k] && sections[k].trim().length>5)
   };
 }
-
-module.exports = { computeATSScores };
