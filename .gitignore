@@ -9,3 +9,5 @@
 /parser/.env
 /parser/myenv/
 .env
+
+.env.example

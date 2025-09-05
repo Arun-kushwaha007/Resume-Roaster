@@ -7,7 +7,8 @@ export const analyzeResume = async (filePath, originalName) => {
   const formData = new FormData();
   formData.append("file", fileStream, { filename: originalName });
 
-  const res = await axios.post("http://localhost:8000/parse", formData, {
+  const parserUrl = process.env.PARSER_URL || "http://localhost:8000";
+  const res = await axios.post(`${parserUrl}/parse`, formData, {
     headers: {
       ...formData.getHeaders(),
     },

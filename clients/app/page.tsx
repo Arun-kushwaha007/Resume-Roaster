@@ -13,8 +13,14 @@ export default function HomePage() {
 
   useEffect(() => {
     if (analysisResult && file) {
+      // Save results to sessionStorage to pass them to the visualizer page
+      sessionStorage.setItem("analysisResult", JSON.stringify(analysisResult));
+      
+      // Create a blob URL for the file and save it
+      const fileUrl = URL.createObjectURL(file);
+      sessionStorage.setItem("resumeFileUrl", fileUrl);
+
       router.push("/visualizer");
-      // If you need state passing, better use Zustand/Redux or URL query
     }
   }, [analysisResult, file, router]);
 
